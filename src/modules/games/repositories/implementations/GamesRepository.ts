@@ -1,5 +1,4 @@
 import { getRepository, Repository } from 'typeorm';
-
 import { User } from '../../../users/entities/User';
 import { Game } from '../../entities/Game';
 
@@ -16,6 +15,8 @@ export class GamesRepository implements IGamesRepository {
     return this.repository
       .createQueryBuilder()
       // Complete usando query builder
+
+      
   }
 
   async countAllGames(): Promise<[{ count: string }]> {

@@ -1,4 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
+import { Game } from '../../../games/entities/Game';
 
 import { IFindUserWithGamesDTO, IFindUserByFullNameDTO } from '../../dtos';
 import { User } from '../../entities/User';
@@ -15,6 +16,14 @@ export class UsersRepository implements IUsersRepository {
     user_id,
   }: IFindUserWithGamesDTO): Promise<User> {
     // Complete usando ORM
+    const user = await this.repository.findOneOrFail({
+        relations: ['games'],
+        where: {
+            id: user_id
+        }
+    });
+  
+    return user;
   }
 
   async findAllUsersOrderedByFirstName(): Promise<User[]> {
